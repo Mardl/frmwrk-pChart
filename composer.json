@@ -2,7 +2,13 @@
     "name": "frameworks/pChart",
     "type": "package",
     "description": "",
-    "homepage": "http://repo.dreiwerken.intern/frameworks/pChart"
+    "homepage": "http://repo.dreiwerken.intern/frameworks/pChart",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "git@repo.dreiwerken.intern:frameworks/pChart.git"
+        }
+    ],
     "autoload": {
         "classmap": ["src/class/"]
     },
