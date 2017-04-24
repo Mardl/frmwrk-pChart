@@ -29,7 +29,7 @@
 
  /* Overlay with a gradient */ 
  $Settings = array("StartR"=>219, "StartG"=>231, "StartB"=>139, "EndR"=>1, "EndG"=>138, "EndB"=>68, "Alpha"=>50);
- $myPicture->drawGradientArea(0,0,700,230,DIRECTION_VERTICAL,$Settings); 
+ $myPicture->drawGradientArea(0,0,700,230,DIRECTION_VERTICAL,$Settings);
  
  /* Add a border to the picture */
  $myPicture->drawRectangle(0,0,699,229,array("R"=>0,"G"=>0,"B"=>0));
