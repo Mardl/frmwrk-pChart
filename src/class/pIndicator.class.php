@@ -63,7 +63,7 @@
      $Unit			= isset($Format["Unit"]) ? $Format["Unit"] : "";
 
      /* Convert the Values to display to an array if needed */
-     if ( !is_array($Values) ) { $Value = $Values; $Values = ""; $Values[] = $Value; }
+     if ( !is_array($Values) ) { $Value = $Values; $Values = []; $Values[] = $Value; }
 
      /* No section, let's die */
      if ( $IndicatorSections == NULL ) { return(0); }
@@ -78,7 +78,7 @@
      $RealWidth = $Width - (count($IndicatorSections)-1)*$SectionsMargin;
      $XScale    = $RealWidth / ($OverallMax-$OverallMin);
 
-     $X1 = $X; $ValuesPos = "";
+     $X1 = $X; $ValuesPos = [];
      foreach ($IndicatorSections as $Key => $Settings)
       {
        $Color      = array("R"=>$Settings["R"],"G"=>$Settings["G"],"B"=>$Settings["B"]);

@@ -256,7 +256,7 @@
      $OverrideTitle	= isset($Format["OverrideTitle"]) ? $Format["OverrideTitle"] : NULL;
      $DrawPoint		= isset($Format["DrawPoint"]) ? $Format["DrawPoint"] : LABEL_POINT_BOX;
 
-     if ( !is_array($Points) ) { $Point = $Points; $Points = ""; $Points[] = $Point; }
+     if ( !is_array($Points) ) { $Point = $Points; $Points = []; $Points[] = $Point; }
 
      $Data    = $this->pDataObject->getData();
      $Palette = $this->pDataObject->getPalette();
@@ -296,7 +296,7 @@
        else
         $Description = "No description";
 
-       $Series = "";
+       $Series = [];
        $Series[] = array("Format"=>$Color,"Caption"=>$Caption);
 
        if ( $Data["Orientation"] == SCALE_POS_LEFTRIGHT )

@@ -91,7 +91,7 @@
      if ( !isset($Data["Series"][$SerieOpen]) || !isset($Data["Series"][$SerieClose]) || !isset($Data["Series"][$SerieMin]) || !isset($Data["Series"][$SerieMax]) )
       return(STOCK_MISSING_SERIE);
 
-     $Plots = "";
+     $Plots = [];
      foreach($Data["Series"][$SerieOpen]["Data"] as $Key => $Value)
       {
        $Point = "";

@@ -522,7 +522,7 @@
          if ( $Ticks != 0 )  { $SplineSettings["Ticks"]  = $Ticks; }
          if ( $Weight != 0 ) { $SplineSettings["Weight"] = $Weight; }
 
-         $LastX = VOID; $LastY = VOID; $WayPoints = ""; $Forces = "";
+         $LastX = VOID; $LastY = VOID; $WayPoints = []; $Forces = [];
          foreach($PosArrayX as $Key => $Value)
           {
            $X = $Value; $Y = $PosArrayY[$Key];
@@ -538,7 +538,7 @@
             { $WayPoints[] = array($X,$Y); $Forces[] = $Force; }
 
            if ( $Y == VOID || $X == VOID )
-            { $SplineSettings["Forces"] = $Forces; $this->pChartObject->drawSpline($WayPoints,$SplineSettings); $WayPoints = ""; $Forces = "";}
+            { $SplineSettings["Forces"] = $Forces; $this->pChartObject->drawSpline($WayPoints,$SplineSettings); $WayPoints = []; $Forces = [];}
 
            $LastX = $X; $LastY = $Y;
           }
@@ -635,7 +635,7 @@
      $XStep = $IconAreaWidth + 5;
      $XStep = $XSpacing;
 
-     $Boundaries = ""; $Boundaries["L"] = $X; $Boundaries["T"] = $Y; $Boundaries["R"] = 0; $Boundaries["B"] = 0; $vY = $Y; $vX = $X;
+     $Boundaries = []; $Boundaries["L"] = $X; $Boundaries["T"] = $Y; $Boundaries["R"] = 0; $Boundaries["B"] = 0; $vY = $Y; $vX = $X;
      foreach($Data["ScatterSeries"] as $Key => $Series)
       {
        if ( $Series["isDrawable"] == TRUE )
@@ -774,7 +774,7 @@
      $XStep = $IconAreaWidth + 5;
      $XStep = $XSpacing;
 
-     $Boundaries = ""; $Boundaries["L"] = $X; $Boundaries["T"] = $Y; $Boundaries["R"] = 0; $Boundaries["B"] = 0; $vY = $Y; $vX = $X;
+     $Boundaries = []; $Boundaries["L"] = $X; $Boundaries["T"] = $Y; $Boundaries["R"] = 0; $Boundaries["B"] = 0; $vY = $Y; $vX = $X;
      foreach($Data["ScatterSeries"] as $Key => $Series)
       {
        if ( $Series["isDrawable"] == TRUE )
@@ -892,7 +892,7 @@
      $Data    = $this->pDataObject->getData();
      $Palette = $this->pDataObject->getPalette();
 
-     if ( !is_array($Points) ) { $Point = $Points; $Points = ""; $Points[0] = $Point; }
+     if ( !is_array($Points) ) { $Point = $Points; $Points = []; $Points[0] = $Point; }
 
      if ( !isset($Data["ScatterSeries"][$ScatterSerieID]) ) 
       return(0);
@@ -943,7 +943,7 @@
          else
           $Description = "No description";
 
-         $Series = "";
+         $Series = [];
          $Series[] = array("Format"=>$Serie,"Caption"=>$Caption);
 
          $this->pChartObject->drawLabelBox($X,$Y-3,$Description,$Series,$Format);

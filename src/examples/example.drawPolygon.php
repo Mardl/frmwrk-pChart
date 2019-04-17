@@ -40,7 +40,7 @@
 
  for($i=1;$i<=4;$i++)
   {
-   $Points = "";
+   $Points = [];
    for($j=0;$j<=360;$j=$j+(360/$Step))
     {
      $Points[] = cos(deg2rad($j))*50+($i*140);

@@ -207,7 +207,7 @@
  if ( $p_template != "default" )
   $myData->loadPalette("../../../palettes/".$p_template.".color",TRUE);
 
- $Axis = "";
+ $Axis = [];
  if ( $d_serie1_enabled == "true" )
   {
    $data0  = stripTail($data0);

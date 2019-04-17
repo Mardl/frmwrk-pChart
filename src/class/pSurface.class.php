@@ -73,7 +73,7 @@
      $Labels		= isset($Format["Labels"]) ? $Format["Labels"] : NULL;
      $CountOffset	= isset($Format["CountOffset"]) ? $Format["CountOffset"] : 0;
 
-     if ( $Labels != NULL && !is_array($Labels) ) { $Label = $Labels; $Labels = ""; $Labels[] = $Label; }
+     if ( $Labels != NULL && !is_array($Labels) ) { $Label = $Labels; $Labels = []; $Labels[] = $Label; }
 
      $X0    = $this->pChartObject->GraphAreaX1;
      $XSize = ($this->pChartObject->GraphAreaX2 - $this->pChartObject->GraphAreaX1) / ($this->GridSizeX+1);
@@ -120,7 +120,7 @@
      $Labels		= isset($Format["Labels"]) ? $Format["Labels"] : NULL;
      $CountOffset	= isset($Format["CountOffset"]) ? $Format["CountOffset"] : 0;
 
-     if ( $Labels != NULL && !is_array($Labels) ) { $Label = $Labels; $Labels = ""; $Labels[] = $Label; }
+     if ( $Labels != NULL && !is_array($Labels) ) { $Label = $Labels; $Labels = []; $Labels[] = $Label; }
 
      $Y0    = $this->pChartObject->GraphAreaY1;
      $YSize = ($this->pChartObject->GraphAreaY2 - $this->pChartObject->GraphAreaY1) / ($this->GridSizeY+1);

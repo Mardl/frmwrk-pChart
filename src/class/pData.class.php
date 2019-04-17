@@ -674,7 +674,7 @@
      $Handle = @fopen($FileName,"r");
      if ($Handle)
       {
-       $HeaderParsed = FALSE; $SerieNames = "";
+       $HeaderParsed = FALSE; $SerieNames = [];
        while (!feof($Handle))
         {
          $Buffer = fgets($Handle, 4096);
@@ -691,7 +691,7 @@
             }
            else
             {
-             if ($SerieNames == "" ) { foreach($Values as $Key => $Name) {  if ( !in_array($Key,$SkipColumns) ) { $SerieNames[$Key] = $DefaultSerieName.$Key; } } }
+             if (empty($SerieNames)) { foreach($Values as $Key => $Name) {  if ( !in_array($Key,$SkipColumns) ) { $SerieNames[$Key] = $DefaultSerieName.$Key; } } }
              foreach($Values as $Key => $Value) {  if ( !in_array($Key,$SkipColumns) ) { $this->addPoints($Value,$SerieNames[$Key]); } }
             }
           }

@@ -33,7 +33,7 @@
   {
    var $pChartObject;
    var $pDataObject;
-   var $LabelPos = "" ;
+   var $LabelPos = [] ;
 
    /* Class creator */
    function __construct($Object,$pDataObject)
@@ -100,7 +100,7 @@
      if ( $SerieSum == 0 ) { return(PIE_SUMISNULL); }
 
      /* Dump the real number of data to draw */
-     $Values = "";
+     $Values = [];
      foreach ($Data["Series"][$DataSerie]["Data"] as $Key => $Value)
       { if ($Value != 0) { $Values[] = $Value; } }
 
@@ -140,7 +140,7 @@
           { $Settings["BorderR"] = $BorderR; $Settings["BorderG"] = $BorderG; $Settings["BorderB"] = $BorderB; }
         }
 
-       $Plots = "";
+       $Plots = [];
        $EndAngle = $Offset+($Value*$ScaleFactor); if ( $EndAngle > 360 ) { $EndAngle = 360; }
 
        $Angle = ($EndAngle - $Offset)/2 + $Offset;
@@ -353,7 +353,7 @@
      if ( $SerieSum == 0 ) { return(PIE_SUMISNULL); }
 
      /* Dump the real number of data to draw */
-     $Values = "";
+     $Values = [];
      foreach ($Data["Series"][$DataSerie]["Data"] as $Key => $Value)
       { if ($Value != 0) { $Values[] = $Value; } }
 
@@ -370,7 +370,7 @@
      $Step   = 360 / (2 * PI * $Radius);
      $Offset = 360; $ID = count($Values)-1;
      $Values = array_reverse($Values);
-     $Slice  = 0; $Slices = ""; $SliceColors = ""; $Visible = ""; $SliceAngle = "";
+     $Slice  = 0; $Slices = []; $SliceColors = []; $Visible = ""; $SliceAngle = "";
      foreach($Values as $Key => $Value)
       {
        if ( !isset($Palette[$ID]["R"]) ) { $Color = $this->pChartObject->getRandomColor(); $Palette[$ID] = $Color; $this->pDataObject->savePalette($ID,$Color); }
@@ -729,7 +729,7 @@
      /* Do we have an abscissa serie defined? */
      if ( $Data["Abscissa"] == "" ) { return(PIE_NO_ABSCISSA); }
 
-     $Boundaries = ""; $Boundaries["L"] = $X; $Boundaries["T"] = $Y; $Boundaries["R"] = 0; $Boundaries["B"] = 0; $vY = $Y; $vX = $X;
+     $Boundaries = []; $Boundaries["L"] = $X; $Boundaries["T"] = $Y; $Boundaries["R"] = 0; $Boundaries["B"] = 0; $vY = $Y; $vX = $X;
      foreach($Data["Series"][$Data["Abscissa"]]["Data"] as $Key => $Value)
       {
        $BoxArray = $this->pChartObject->getTextBox($vX+$BoxSize+4,$vY+$BoxSize/2,$FontName,$FontSize,0,$Value);
@@ -820,7 +820,7 @@
        $YTop    = $Y2 - $Height/2 - 2;
        $YBottom = $Y2 + $Height/2 + 2;
 
-       if ( $this->LabelPos != "" )
+       if ( !empty($this->LabelPos) )
         {
          $Done = FALSE;
          foreach($this->LabelPos as $Key => $Settings)
@@ -859,7 +859,7 @@
    /* Internally used to write the re-computed labels */
    function writeShiftedLabels()
     {
-     if ( $this->LabelPos == "" ) { return(0); }
+     if ( empty($this->LabelPos) ) { return(0); }
      foreach($this->LabelPos as $Key => $Settings)
       {
        $X1 = $Settings["X1"]; $Y1 = $Settings["Y1"];
@@ -936,7 +936,7 @@
      if ( $SerieSum == 0 ) { return(PIE_SUMISNULL); }
 
      /* Dump the real number of data to draw */
-     $Values = "";
+     $Values = [];
      foreach ($Data["Series"][$DataSerie]["Data"] as $Key => $Value)
       { if ($Value != 0) { $Values[] = $Value; } }
 
@@ -976,7 +976,7 @@
           $BorderColor = $Settings;
         }
 
-       $Plots = ""; $Boundaries = ""; $AAPixels = "";
+       $Plots = []; $Boundaries = []; $AAPixels = [];
        $EndAngle = $Offset+($Value*$ScaleFactor); if ( $EndAngle > 360 ) { $EndAngle = 360; }
        for($i=$Offset;$i<=$EndAngle;$i=$i+$Step)
         {
@@ -1148,7 +1148,7 @@
      if ( $SerieSum == 0 ) { return(PIE_SUMISNULL); }
 
      /* Dump the real number of data to draw */
-     $Values = "";
+     $Values = [];
      foreach ($Data["Series"][$DataSerie]["Data"] as $Key => $Value)
       { if ($Value != 0) { $Values[] = $Value; } }
 
@@ -1164,7 +1164,7 @@
      /* Draw the polygon ring elements */
      $Offset = 360; $ID = count($Values)-1;
      $Values = array_reverse($Values);
-     $Slice  = 0; $Slices = ""; $SliceColors = ""; $Visible = ""; $SliceAngle = "";
+     $Slice  = 0; $Slices = []; $SliceColors = []; $Visible = ""; $SliceAngle = "";
      foreach($Values as $Key => $Value)
       {
        if ( !isset($Palette[$ID]["R"]) ) { $Color = $this->pChartObject->getRandomColor(); $Palette[$ID] = $Color; $this->pDataObject->savePalette($ID,$Color); }
@@ -1317,7 +1317,7 @@
 
        if ( $StartAngle < 180 )
         {
-         $Points = "";
+         $Points = [];
          $Points[] = $Plots["InX2"];
          $Points[] = $Plots["InY2"];
          $Points[] = $Plots["InX2"];
@@ -1332,7 +1332,7 @@
 
        if ( $EndAngle > 180 )
         {
-         $Points = "";
+         $Points = [];
          $Points[] = $Plots["InX1"];
          $Points[] = $Plots["InY1"];
          $Points[] = $Plots["InX1"];

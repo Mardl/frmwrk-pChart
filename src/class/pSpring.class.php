@@ -541,7 +541,7 @@
       }
 
      /* Dump all links */
-     $Links = "";
+     $Links = [];
      foreach($this->Data as $Key => $Settings)
       {
        $X1 = $Settings["X"];
@@ -767,7 +767,7 @@
         }
        elseif ( $Shape == NODE_SHAPE_TRIANGLE )
         {
-         $Points = "";
+         $Points = [];
          $Points[] = cos(deg2rad(270)) * $Size + $X; $Points[] = sin(deg2rad(270)) * $Size + $Y;
          $Points[] = cos(deg2rad(45)) * $Size + $X;  $Points[] = sin(deg2rad(45)) * $Size + $Y;
          $Points[] = cos(deg2rad(135)) * $Size + $X; $Points[] = sin(deg2rad(135)) * $Size + $Y;
