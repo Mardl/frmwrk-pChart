@@ -27,8 +27,8 @@
    function __construct($BasePath="",$EnableMOD43=FALSE)
     {
      $this->MOD43  = $EnableMOD43;
-     $this->Codes   = "";
-     $this->Reverse = "";
+     $this->Codes   = [];
+     $this->Reverse = [];
 
      $FileHandle = @fopen($BasePath."data/39.db", "r");
 

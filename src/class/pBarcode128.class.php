@@ -25,8 +25,8 @@
    /* Class creator */
    function __construct($BasePath="")
     {
-     $this->Codes   = "";
-     $this->Reverse = "";
+     $this->Codes   = [];
+     $this->Reverse = [];
 
      $FileHandle = @fopen($BasePath."data/128B.db", "r");
 

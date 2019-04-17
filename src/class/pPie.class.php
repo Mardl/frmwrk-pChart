@@ -370,7 +370,7 @@
      $Step   = 360 / (2 * PI * $Radius);
      $Offset = 360; $ID = count($Values)-1;
      $Values = array_reverse($Values);
-     $Slice  = 0; $Slices = []; $SliceColors = []; $Visible = ""; $SliceAngle = "";
+     $Slice  = 0; $Slices = []; $SliceColors = []; $Visible = []; $SliceAngle = [];
      foreach($Values as $Key => $Value)
       {
        if ( !isset($Palette[$ID]["R"]) ) { $Color = $this->pChartObject->getRandomColor(); $Palette[$ID] = $Color; $this->pDataObject->savePalette($ID,$Color); }
@@ -415,7 +415,7 @@
       {
        foreach($Slices as $SliceID => $Plots)
         {
-         $ShadowPie = "";
+         $ShadowPie = [];
          for($i=0;$i<count($Plots);$i=$i+2)
           { $ShadowPie[] = $Plots[$i]+$this->pChartObject->ShadowX; $ShadowPie[] = $Plots[$i+1]+$this->pChartObject->ShadowY; }
 
@@ -479,7 +479,7 @@
        if ( $Visible[$SliceID]["Start"] && isset($Plots[2])) /* Empty error handling */
         {
          $this->pChartObject->drawLine($Plots[2],$Plots[3],$Plots[2],$Plots[3]- $SliceHeight,array("R"=>$Settings["R"],"G"=>$Settings["G"],"B"=>$Settings["B"]));
-         $Border = "";
+         $Border = [];
          $Border[] = $Plots[0]; $Border[] = $Plots[1]; $Border[] = $Plots[0]; $Border[] = $Plots[1] - $SliceHeight;
          $Border[] = $Plots[2]; $Border[] = $Plots[3] - $SliceHeight; $Border[] = $Plots[2]; $Border[] = $Plots[3]; 
          $this->pChartObject->drawPolygon($Border,$Settings);
@@ -496,7 +496,7 @@
         {
          $this->pChartObject->drawLine($Plots[count($Plots)-2],$Plots[count($Plots)-1],$Plots[count($Plots)-2],$Plots[count($Plots)-1]- $SliceHeight,array("R"=>$Settings["R"],"G"=>$Settings["G"],"B"=>$Settings["B"]));
 
-         $Border = "";
+         $Border = [];
          $Border[] = $Plots[0]; $Border[] = $Plots[1]; $Border[] = $Plots[0]; $Border[] = $Plots[1] - $SliceHeight;
          $Border[] = $Plots[count($Plots)-2]; $Border[] = $Plots[count($Plots)-1] - $SliceHeight; $Border[] = $Plots[count($Plots)-2]; $Border[] = $Plots[count($Plots)-1]; 
          $this->pChartObject->drawPolygon($Border,$Settings);
@@ -514,7 +514,7 @@
          $Angle = $SliceAngle[$SliceID][$j/2];
          if ( $Angle < 270 && $Angle > 90 )
           {
-           $Border = "";
+           $Border = [];
            $Border[] = $Plots[$j];   $Border[] = $Plots[$j+1];
            $Border[] = $Plots[$j+2]; $Border[] = $Plots[$j+3];
            $Border[] = $Plots[$j+2]; $Border[] = $Plots[$j+3] - $SliceHeight;
@@ -571,7 +571,7 @@
        $Settings = $SliceColors[$SliceID];
        $Settings["R"]+= 20; $Settings["G"]+= 20; $Settings["B"]+= 20;
 
-       $Top = "";
+       $Top = [];
        for($j=0;$j<count($Plots);$j=$j+2) { $Top[] = $Plots[$j]; $Top[] = $Plots[$j+1]- $SliceHeight; }
        $this->pChartObject->drawPolygon($Top,$Settings);
 
@@ -1164,7 +1164,7 @@
      /* Draw the polygon ring elements */
      $Offset = 360; $ID = count($Values)-1;
      $Values = array_reverse($Values);
-     $Slice  = 0; $Slices = []; $SliceColors = []; $Visible = ""; $SliceAngle = "";
+     $Slice  = 0; $Slices = []; $SliceColors = []; $Visible = []; $SliceAngle = [];
      foreach($Values as $Key => $Value)
       {
        if ( !isset($Palette[$ID]["R"]) ) { $Color = $this->pChartObject->getRandomColor(); $Palette[$ID] = $Color; $this->pDataObject->savePalette($ID,$Color); }
@@ -1284,7 +1284,7 @@
        $Settings["R"] = $Settings["R"]+$Cf; $Settings["G"] = $Settings["G"]+$Cf; $Settings["B"] = $Settings["B"]+$Cf;
 
        $Outer = TRUE; $Inner = FALSE;
-       $InnerPlotsA = ""; $InnerPlotsB = "";
+       $InnerPlotsA = []; $InnerPlotsB = [];
        foreach($Plots["Angle"] as $ID => $Angle)
         {
          if ( $Angle == VOID )
@@ -1302,7 +1302,7 @@
           }
         }
 
-       if ( $InnerPlotsA != "" )
+       if ( !empty($InnerPlotsA) )
         { $InnerPlots = array_merge($InnerPlotsA,$this->arrayReverse($InnerPlotsB)); $this->pChartObject->drawPolygon($InnerPlots,$Settings); }
       }
 
@@ -1370,7 +1370,7 @@
        $Settings["R"] = $Settings["R"]+$Cf; $Settings["G"] = $Settings["G"]+$Cf; $Settings["B"] = $Settings["B"]+$Cf;
 
        $Outer = TRUE; $Inner = FALSE;
-       $OuterPlotsA = ""; $OuterPlotsB = ""; $InnerPlotsA = ""; $InnerPlotsB = "";
+       $OuterPlotsA = []; $OuterPlotsB = []; $InnerPlotsA = []; $InnerPlotsB = [];
        foreach($Plots["Angle"] as $ID => $Angle)
         {
          if ( $Angle == VOID )
@@ -1387,7 +1387,7 @@
             }
           }
         }
-       if ( $OuterPlotsA != "" )
+       if ( !empty($OuterPlotsA) )
         { $OuterPlots = array_merge($OuterPlotsA,$this->arrayReverse($OuterPlotsB)); $this->pChartObject->drawPolygon($OuterPlots,$Settings); }
       }
 
@@ -1464,7 +1464,7 @@
   /* Reverse an array */
   function arrayReverse($Plots)
    {
-    $Result = "";
+    $Result = [];
 
     for($i=count($Plots)-1;$i>=0;$i=$i-2)
      { $Result[] = $Plots[$i-1]; $Result[] = $Plots[$i]; }
@@ -1475,7 +1475,7 @@
   /* Remove unused series & values */
   function clean0Values($Data,$Palette,$DataSerie,$AbscissaSerie)
    {
-    $NewPalette = ""; $NewData = ""; $NewAbscissa = "";
+    $NewPalette = []; $NewData = []; $NewAbscissa = [];
 
     /* Remove unused series */
     foreach($Data["Series"] as $SerieName => $SerieSettings)

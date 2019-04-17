@@ -392,7 +392,7 @@
      $Step = 360 / (2 * PI * $Radius);
      $Color  = $this->allocateColor($this->Picture,$R,$G,$B,$Alpha);
      $Color2 = $this->allocateColor($this->Picture,255,0,0,$Alpha);
-     $Drawn = "";
+     $Drawn = [];
 
      if ( $Alpha < 100 )  { $Drawn[$YTop] = FALSE; }
      if ( $Alpha < 100 )  { $Drawn[$YBottom] = TRUE; }
@@ -586,7 +586,7 @@
      $PathOnly	= isset($Format["PathOnly"]) ? $Format["PathOnly"] : FALSE;
      $Weight	= isset($Format["Weight"]) ? $Format["Weight"] : NULL;
 
-     $Cpt = NULL; $Mode = NULL; $Result = "";
+     $Cpt = NULL; $Mode = NULL; $Result = [];
      for($i=1;$i<=count($Coordinates)-1;$i++)
       {
        $X1 = $Coordinates[$i-1][0]; $Y1 = $Coordinates[$i-1][1];
@@ -663,12 +663,12 @@
      $P[3]["X"] = $X2;  $P[3]["Y"] = $Y2;
 
      /* Compute the bezier points */
-     $Q = ""; $ID = 0; $Path = "";
+     $Q = []; $ID = 0; $Path = "";
      for($i=0;$i<=$Precision;$i=$i+1)
       {
        $u = $i / $Precision;
 
-       $C    = "";
+       $C    = [];
        $C[0] = (1 - $u) * (1 - $u) * (1 - $u);
        $C[1] = ($u * 3) * (1 - $u) * (1 - $u);
        $C[2] = 3 * $u * $u * (1 - $u);
@@ -676,7 +676,7 @@
 
        for($j=0;$j<=3;$j++)
         {
-         if ( !isset($Q[$ID]) ) { $Q[$ID] = ""; }
+         if ( !isset($Q[$ID]) ) { $Q[$ID] = []; }
          if ( !isset($Q[$ID]["X"]) ) { $Q[$ID]["X"] = 0; }
          if ( !isset($Q[$ID]["Y"]) ) { $Q[$ID]["Y"] = 0; }
 
@@ -772,7 +772,7 @@
 
        if ( $Ticks == NULL )
         {
-         $Points   = ""; 
+         $Points   = []; 
          $Points[] = cos(deg2rad($Angle-90)) * $Weight + $X1; $Points[] = sin(deg2rad($Angle-90)) * $Weight + $Y1;
          $Points[] = cos(deg2rad($Angle+90)) * $Weight + $X1; $Points[] = sin(deg2rad($Angle+90)) * $Weight + $Y1;
          $Points[] = cos(deg2rad($Angle+90)) * $Weight + $X2; $Points[] = sin(deg2rad($Angle+90)) * $Weight + $Y2;
@@ -787,7 +787,7 @@
            $Xa = (($X2-$X1)/$Distance) * $i + $X1; $Ya = (($Y2-$Y1)/$Distance) * $i + $Y1;
            $Xb = (($X2-$X1)/$Distance) * ($i+$Ticks) + $X1; $Yb = (($Y2-$Y1)/$Distance) * ($i+$Ticks) + $Y1;
 
-           $Points   = ""; 
+           $Points   = []; 
            $Points[] = cos(deg2rad($Angle-90)) * $Weight + $Xa; $Points[] = sin(deg2rad($Angle-90)) * $Weight + $Ya;
            $Points[] = cos(deg2rad($Angle+90)) * $Weight + $Xa; $Points[] = sin(deg2rad($Angle+90)) * $Weight + $Ya;
            $Points[] = cos(deg2rad($Angle+90)) * $Weight + $Xb; $Points[] = sin(deg2rad($Angle+90)) * $Weight + $Yb;
@@ -921,7 +921,7 @@
        $this->drawFilledCircle($X+$this->ShadowX,$Y+$this->ShadowY,$Radius,array("R"=>$this->ShadowR,"G"=>$this->ShadowG,"B"=>$this->ShadowB,"Alpha"=>$this->Shadowa,"Ticks"=>$Ticks));
       }
 
-     $this->Mask  = "";
+     $this->Mask  = [];
      $Color = $this->allocateColor($this->Picture,$R,$G,$B,$Alpha);
      for ($i=0; $i<=$Radius*2; $i++)
       {
@@ -937,7 +937,7 @@
      if ( $this->Antialias )
       $this->drawCircle($X,$Y,$Radius,$Radius,array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha,"Ticks"=>$Ticks));
 
-     $this->Mask = "";
+     $this->Mask = [];
 
      if ( $BorderR != -1 )
       $this->drawCircle($X,$Y,$Radius,$Radius,array("R"=>$BorderR,"G"=>$BorderG,"B"=>$BorderB,"Alpha"=>$BorderAlpha,"Ticks"=>$Ticks));
@@ -1137,7 +1137,6 @@
        return(0);
       }
 
-     $Plot = "";
      $Xi   = floor($X);
      $Yi   = floor($Y);
 
@@ -1333,7 +1332,7 @@
        $TailX2 = cos(($Angle-180)*PI/180)*$Size+$X1;
        $TailY2 = sin(($Angle-180)*PI/180)*$Size+$Y1;
 
-       $Points   = "";
+       $Points   = [];
        $Points[] = $X1; $Points[]  = $Y1;
        $Points[] = cos(($Angle-90)*PI/180)*$Size*$Ratio+$TailX2; $Points[] = sin(($Angle-90)*PI/180)*$Size*$Ratio+$TailY2;
        $Points[] = cos(($Angle-270)*PI/180)*$Size*$Ratio+$TailX2; $Points[] = sin(($Angle-270)*PI/180)*$Size*$Ratio+$TailY2;
@@ -1558,7 +1557,7 @@
          elseif ( $Mode == LEGEND_HORIZONTAL )
           {
            $Lines = preg_split("/\n/",$Serie["Description"]);
-           $Width = "";
+           $Width = [];
            foreach($Lines as $Key => $Value)
             {
              $BoxArray = $this->getTextBox($vX+$IconAreaWidth+6,$Y+$IconAreaHeight/2+(($this->FontSize+3)*$Key),$FontName,$FontSize,0,$Value);
@@ -1648,7 +1647,7 @@
          elseif ( $Mode == LEGEND_HORIZONTAL )
           {
            $Lines = preg_split("/\n/",$Serie["Description"]);
-           $Width = "";
+           $Width = [];
            foreach($Lines as $Key => $Value)
             {
              $BoxArray = $this->getTextBox($vX+$IconAreaWidth+6,$Y+$IconAreaHeight/2+(($this->FontSize+3)*$Key),$FontName,$FontSize,0,$Value);
@@ -1723,7 +1722,7 @@
          elseif ( $Mode == LEGEND_HORIZONTAL )
           {
            $Lines = preg_split("/\n/",$Serie["Description"]);
-           $Width = "";
+           $Width = [];
            foreach($Lines as $Key => $Value)
             {
              $BoxArray = $this->drawText($X+$IconAreaWidth+4,$Y+$IconAreaHeight/2+(($this->FontSize+3)*$Key),$Value,array("R"=>$FontR,"G"=>$FontG,"B"=>$FontB,"Align"=>TEXT_ALIGN_MIDDLELEFT,"FontSize"=>$FontSize,"FontName"=>$FontName));
@@ -2511,7 +2510,7 @@
       }
 
      /* Found no correct scale, shame,... returns the 1st one as default */
-     if ( $GoodScaleFactors == "" ) { return($Results[$Factors[0]]); }
+     if ( empty($GoodScaleFactors) ) { return($Results[$Factors[0]]); }
 
      /* Find the factor that cause the maximum number of Rows */
      $MaxRows = 0; $BestFactor = 0;
@@ -2537,7 +2536,7 @@
      else
       $Mode = AXIS_FORMAT_DEFAULT;
 
-     $Scale = "";
+     $Scale = [];
      if ( $XMin != $XMax )
       {
        $Found = FALSE; $Rescaled = FALSE; $Scaled10Factor = .0001; $Result = 0;
@@ -3095,7 +3094,7 @@
      if ( $SerieName != NULL ) { $AxisID = $Data["Series"][$SerieName]["Axis"]; }
      if ( !is_array($Values) ) { $tmp = $Values; $Values = []; $Values[0] = $tmp; }
 
-     $Result = "";
+     $Result = [];
      if ( $Data["Orientation"] == SCALE_POS_LEFTRIGHT )
       {
        $Height      = ($this->GraphAreaY2 - $this->GraphAreaY1) - $Data["Axis"][$AxisID]["Margin"]*2;
@@ -3385,7 +3384,7 @@
            if ( $Picture != NULL ) { $PicOffset = $PicHeight / 2; $SerieWeight = 0; }
            $X = $this->GraphAreaX1 + $XMargin;
 
-           if ( !is_array($PosArray) ) { $Value = $PosArray; $PosArray = ""; $PosArray[0] = $Value; }
+           if ( !is_array($PosArray) ) { $Value = $PosArray; $PosArray = []; $PosArray[0] = $Value; }
            foreach($PosArray as $Key => $Y)
             {
              if ( $DisplayValues ) 
@@ -3409,7 +3408,7 @@
            if ( $Picture != NULL ) { $PicOffset = $PicWidth / 2; $SerieWeight = 0; }
            $Y = $this->GraphAreaY1 + $XMargin;
 
-           if ( !is_array($PosArray) ) { $Value = $PosArray; $PosArray = ""; $PosArray[0] = $Value; }
+           if ( !is_array($PosArray) ) { $Value = $PosArray; $PosArray = []; $PosArray[0] = $Value; }
            foreach($PosArray as $Key => $X)
             {
              if ( $DisplayValues ) 
@@ -3482,7 +3481,7 @@
            $X     = $this->GraphAreaX1 + $XMargin; $WayPoints = [];
            $Force = $XStep / 5;
 
-           if ( !is_array($PosArray) ) { $Value = $PosArray; $PosArray = ""; $PosArray[0] = $Value; }
+           if ( !is_array($PosArray) ) { $Value = $PosArray; $PosArray = []; $PosArray[0] = $Value; }
            $LastGoodY = NULL; $LastGoodX = NULL; $LastX = 1; $LastY = 1;
            foreach($PosArray as $Key => $Y)
             {
@@ -3514,7 +3513,7 @@
            $Y     = $this->GraphAreaY1 + $XMargin; $WayPoints = [];
            $Force = $YStep / 5;
 
-           if ( !is_array($PosArray) ) { $Value = $PosArray; $PosArray = ""; $PosArray[0] = $Value; }
+           if ( !is_array($PosArray) ) { $Value = $PosArray; $PosArray = []; $PosArray[0] = $Value; }
            $LastGoodY = NULL; $LastGoodX = NULL; $LastX = 1; $LastY = 1;
            foreach($PosArray as $Key => $X)
             {
@@ -3597,7 +3596,7 @@
            if ( $YZero < $this->GraphAreaY1+1 ) { $YZero = $this->GraphAreaY1+1; }
 
            $LastX = ""; $LastY = "";
-           if ( !is_array($PosArray) ) { $Value = $PosArray; $PosArray = ""; $PosArray[0] = $Value; }
+           if ( !is_array($PosArray) ) { $Value = $PosArray; $PosArray = []; $PosArray[0] = $Value; }
            foreach($PosArray as $Key => $Y)
             {
              if ( $DisplayValues ) 
@@ -3607,7 +3606,7 @@
               {
                $Area = $this->drawSpline($WayPoints,array("Force"=>$Force,"PathOnly"=>TRUE));
 
-               if ( $Area != "" )
+               if ( !empty($Area) )
                 {
                  foreach ($Area as $key => $Points)
                   {
@@ -3633,7 +3632,7 @@
             }
            $Area = $this->drawSpline($WayPoints,array("Force"=>$Force,"PathOnly"=>TRUE));
 
-           if ( $Area != "" )
+           if ( !empty($Area )
             {
              foreach ($Area as $key => $Points)
               {
@@ -3660,7 +3659,7 @@
            if ( $YZero > $this->GraphAreaX2-1 ) { $YZero = $this->GraphAreaX2-1; }
            if ( $YZero < $this->GraphAreaX1+1 ) { $YZero = $this->GraphAreaX1+1; }
 
-           if ( !is_array($PosArray) ) { $Value = $PosArray; $PosArray = ""; $PosArray[0] = $Value; }
+           if ( !is_array($PosArray) ) { $Value = $PosArray; $PosArray = []; $PosArray[0] = $Value; }
            foreach($PosArray as $Key => $X)
             {
              if ( $DisplayValues ) 
@@ -3670,7 +3669,7 @@
               {
                $Area = $this->drawSpline($WayPoints,array("Force"=>$Force,"PathOnly"=>TRUE));
 
-               if ( $Area != "" )
+               if ( !empty($Area )
                 {
                  foreach ($Area as $key => $Points)
                   {
@@ -3696,7 +3695,7 @@
             }
            $Area = $this->drawSpline($WayPoints,array("Force"=>$Force,"PathOnly"=>TRUE));
 
-           if ( $Area != "" )
+           if ( !empty($Area )
             {
              foreach ($Area as $key => $Points)
               {
@@ -3776,7 +3775,7 @@
            if ( $XDivs == 0 ) { $XStep = ($this->GraphAreaX2-$this->GraphAreaX1)/4; } else { $XStep = ($this->GraphAreaX2-$this->GraphAreaX1-$XMargin*2)/$XDivs; }
            $X = $this->GraphAreaX1 + $XMargin; $LastX = NULL; $LastY = NULL;
 
-           if ( !is_array($PosArray) ) { $Value = $PosArray; $PosArray = ""; $PosArray[0] = $Value; }
+           if ( !is_array($PosArray) ) { $Value = $PosArray; $PosArray = []; $PosArray[0] = $Value; }
            $LastGoodY = NULL; $LastGoodX = NULL;
            foreach($PosArray as $Key => $Y)
             {
@@ -3806,7 +3805,7 @@
            if ( $XDivs == 0 ) { $YStep = ($this->GraphAreaY2-$this->GraphAreaY1)/4; } else { $YStep = ($this->GraphAreaY2-$this->GraphAreaY1-$XMargin*2)/$XDivs; }
            $Y = $this->GraphAreaY1 + $XMargin; $LastX = NULL; $LastY = NULL;
 
-           if ( !is_array($PosArray) ) { $Value = $PosArray; $PosArray = ""; $PosArray[0] = $Value; }
+           if ( !is_array($PosArray) ) { $Value = $PosArray; $PosArray = []; $PosArray[0] = $Value; }
            $LastGoodY = NULL; $LastGoodX = NULL;
            foreach($PosArray as $Key => $X)
             {
@@ -3973,7 +3972,7 @@
            if ( $XDivs == 0 ) { $XStep = ($this->GraphAreaX2-$this->GraphAreaX1)/4; } else { $XStep = ($this->GraphAreaX2-$this->GraphAreaX1-$XMargin*2)/$XDivs; }
            $X = $this->GraphAreaX1 + $XMargin; $LastX = NULL; $LastY = NULL;
 
-           if ( !is_array($PosArray) ) { $Value = $PosArray; $PosArray = ""; $PosArray[0] = $Value; }
+           if ( !is_array($PosArray) ) { $Value = $PosArray; $PosArray = []; $PosArray[0] = $Value; }
            $LastGoodY = NULL; $LastGoodX = NULL; $Init = FALSE;
            foreach($PosArray as $Key => $Y)
             {
@@ -4037,7 +4036,7 @@
            if ( $XDivs == 0 ) { $YStep = ($this->GraphAreaY2-$this->GraphAreaY1)/4; } else { $YStep = ($this->GraphAreaY2-$this->GraphAreaY1-$XMargin*2)/$XDivs; }
            $Y = $this->GraphAreaY1 + $XMargin; $LastX = NULL; $LastY = NULL;
 
-           if ( !is_array($PosArray) ) { $Value = $PosArray; $PosArray = ""; $PosArray[0] = $Value; }
+           if ( !is_array($PosArray) ) { $Value = $PosArray; $PosArray = []; $PosArray[0] = $Value; }
            $LastGoodY = NULL; $LastGoodX = NULL; $Init = FALSE;
            foreach($PosArray as $Key => $X)
             {
@@ -4138,11 +4137,11 @@
 
            if ( !$AroundZero ) { $YZero = $this->GraphAreaY2-1; }
 
-           if ( !is_array($PosArray) ) { $Value = $PosArray; $PosArray = ""; $PosArray[0] = $Value; }
+           if ( !is_array($PosArray) ) { $Value = $PosArray; $PosArray = []; $PosArray[0] = $Value; }
            $LastGoodY = NULL; $LastGoodX = NULL; $Points = []; $Init = FALSE;
            foreach($PosArray as $Key => $Y)
             {
-             if ( $Y == VOID && $LastX != NULL && $LastY != NULL && $Points !="" )
+             if ( $Y == VOID && $LastX != NULL && $LastY != NULL && !empty($Points) )
               {
                $Points[] = $LastX; $Points[] = $LastY;
                $Points[] = $X; $Points[] = $LastY;
@@ -4153,7 +4152,7 @@
 
              if ( $Y != VOID && $LastX != NULL && $LastY != NULL )
               {
-               if ( $Points == "") { $Points[] = $LastX; $Points[] = $YZero; }
+               if ( empty($Points)) { $Points[] = $LastX; $Points[] = $YZero; }
                $Points[] = $LastX; $Points[] = $LastY;
                $Points[] = $X; $Points[] = $LastY;
                $Points[] = $X; $Points[] = $Y;
@@ -4186,11 +4185,11 @@
            if ( $XDivs == 0 ) { $YStep = ($this->GraphAreaY2-$this->GraphAreaY1)/4; } else { $YStep = ($this->GraphAreaY2-$this->GraphAreaY1-$XMargin*2)/$XDivs; }
            $Y = $this->GraphAreaY1 + $XMargin; $LastX = NULL; $LastY = NULL;
 
-           if ( !is_array($PosArray) ) { $Value = $PosArray; $PosArray = ""; $PosArray[0] = $Value; }
+           if ( !is_array($PosArray) ) { $Value = $PosArray; $PosArray = []; $PosArray[0] = $Value; }
            $LastGoodY = NULL; $LastGoodX = NULL; $Points = [];
            foreach($PosArray as $Key => $X)
             {
-             if ( $X == VOID && $LastX != NULL && $LastY != NULL && $Points !="" )
+             if ( $X == VOID && $LastX != NULL && $LastY != NULL && !empty($Points) )
               {
                $Points[] = $LastX; $Points[] = $LastY;
                $Points[] = $LastX; $Points[] = $Y;
@@ -4201,7 +4200,7 @@
 
              if ( $X != VOID && $LastX != NULL && $LastY != NULL )
               {
-               if ( $Points == "") { $Points[] = $YZero; $Points[] = $LastY; }
+               if ( empty($Points)) { $Points[] = $YZero; $Points[] = $LastY; }
                $Points[] = $LastX; $Points[] = $LastY;
                $Points[] = $LastX; $Points[] = $Y;
                $Points[] = $X; $Points[] = $Y;
@@ -4285,7 +4284,7 @@
            if ( $XDivs == 0 ) { $XStep = ($this->GraphAreaX2-$this->GraphAreaX1)/4; } else { $XStep = ($this->GraphAreaX2-$this->GraphAreaX1-$XMargin*2)/$XDivs; }
            $X = $this->GraphAreaX1 + $XMargin; $LastX = NULL; $LastY = NULL;
 
-           if ( !is_array($PosArray) ) { $Value = $PosArray; $PosArray = ""; $PosArray[0] = $Value; }
+           if ( !is_array($PosArray) ) { $Value = $PosArray; $PosArray = []; $PosArray[0] = $Value; }
            foreach($PosArray as $Key => $Y)
             {
              if ( $DisplayValues && $Serie["Data"][$Key] != VOID )
@@ -4325,10 +4324,10 @@
            /* Handle shadows in the areas */
            if ( $this->Shadow )
             {
-             $ShadowArea = "";
+             $ShadowArea = [];
              foreach($Areas as $Key => $Points)
               {
-               $ShadowArea[$Key] = "";
+               $ShadowArea[$Key] = [];
                foreach($Points as $Key2 => $Value)
                 {
                  if ( $Key2 % 2 == 0 )
@@ -4360,7 +4359,7 @@
            if ( $XDivs == 0 ) { $YStep = ($this->GraphAreaY2-$this->GraphAreaY1)/4; } else { $YStep = ($this->GraphAreaY2-$this->GraphAreaY1-$XMargin*2)/$XDivs; }
            $Y     = $this->GraphAreaY1 + $XMargin; $LastX = NULL; $LastY = NULL;
 
-           if ( !is_array($PosArray) ) { $Value = $PosArray; $PosArray = ""; $PosArray[0] = $Value; }
+           if ( !is_array($PosArray) ) { $Value = $PosArray; $PosArray = []; $PosArray[0] = $Value; }
            foreach($PosArray as $Key => $X)
             {
              if ( $DisplayValues && $Serie["Data"][$Key] != VOID )
@@ -4401,10 +4400,10 @@
            /* Handle shadows in the areas */
            if ( $this->Shadow )
             {
-             $ShadowArea = "";
+             $ShadowArea = [];
              foreach($Areas as $Key => $Points)
               {
-               $ShadowArea[$Key] = "";
+               $ShadowArea[$Key] = [];
                foreach($Points as $Key2 => $Value)
                 {
                  if ( $Key2 % 2 == 0 )
@@ -4530,7 +4529,7 @@
 
            if ( $Rounded || $BorderR != -1) { $XSpace = 1; } else { $XSpace = 0; }
 
-           if ( !is_array($PosArray) ) { $Value = $PosArray; $PosArray = ""; $PosArray[0] = $Value; }
+           if ( !is_array($PosArray) ) { $Value = $PosArray; $PosArray = []; $PosArray[0] = $Value; }
 
            $ID = 0;
            foreach($PosArray as $Key => $Y2)
@@ -4659,7 +4658,7 @@
 
            if ( $Rounded || $BorderR != -1 ) { $YSpace = 1; } else { $YSpace = 0; }
 
-           if ( !is_array($PosArray) ) { $Value = $PosArray; $PosArray = ""; $PosArray[0] = $Value; }
+           if ( !is_array($PosArray) ) { $Value = $PosArray; $PosArray = []; $PosArray[0] = $Value; }
 
            $ID = 0 ;
            foreach($PosArray as $Key => $X2)
@@ -4813,7 +4812,7 @@
 
      $RestoreShadow = $this->Shadow;
 
-     $LastX = ""; $LastY = "";
+     $LastX = []; $LastY = [];
      foreach($Data["Series"] as $SerieName => $Serie)
       {
        if ( $Serie["isDrawable"] == TRUE && $SerieName != $Data["Abscissa"] )
@@ -4849,14 +4848,14 @@
            $XSize   = ($XStep / (1+$Interleave) );
            $XOffset = -($XSize/2);
 
-           if ( !is_array($PosArray) ) { $Value = $PosArray; $PosArray = ""; $PosArray[0] = $Value; }
+           if ( !is_array($PosArray) ) { $Value = $PosArray; $PosArray = []; $PosArray[0] = $Value; }
            foreach($PosArray as $Key => $Height)
             {
              if ( $Height != VOID && $Serie["Data"][$Key] != 0 )
               {
                if ( $Serie["Data"][$Key] > 0 ) { $Pos = "+"; } else { $Pos = "-"; }
 
-               if ( !isset($LastY[$Key] ) ) { $LastY[$Key] = ""; }
+               if ( !isset($LastY[$Key] ) ) { $LastY[$Key] = []; }
                if ( !isset($LastY[$Key][$Pos] ) ) { $LastY[$Key][$Pos] = $YZero; }
 
                $Y1 = $LastY[$Key][$Pos];
@@ -4944,14 +4943,14 @@
            $YSize   = $YStep / (1+$Interleave);
            $YOffset = -($YSize/2);
 
-           if ( !is_array($PosArray) ) { $Value = $PosArray; $PosArray = ""; $PosArray[0] = $Value; }
+           if ( !is_array($PosArray) ) { $Value = $PosArray; $PosArray = []; $PosArray[0] = $Value; }
            foreach($PosArray as $Key => $Width)
             {
              if ( $Width != VOID && $Serie["Data"][$Key] != 0 )
               {
                if ( $Serie["Data"][$Key] > 0 ) { $Pos = "+"; } else { $Pos = "-"; }
 
-               if ( !isset($LastX[$Key] ) ) { $LastX[$Key] = ""; }
+               if ( !isset($LastX[$Key] ) ) { $LastX[$Key] = []; }
                if ( !isset($LastX[$Key][$Pos] ) ) { $LastX[$Key][$Pos] = $YZero; }
 
                $X1 = $LastX[$Key][$Pos];
@@ -5059,9 +5058,8 @@
      $this->Shadow  = FALSE;
 
      /* Build the offset data series */
-     $OffsetData    = "";
-     $OverallOffset = "";
-     $SerieOrder    = "";
+     $OverallOffset = [];
+     $SerieOrder    = [];
      foreach($Data["Series"] as $SerieName => $Serie)
       {
        if ( $Serie["isDrawable"] == TRUE && $SerieName != $Data["Abscissa"] )
@@ -5085,7 +5083,6 @@
       }
      $SerieOrder = array_reverse($SerieOrder);
 
-     $LastX = ""; $LastY = "";
      foreach($SerieOrder as $Key => $SerieName)
       {
        $Serie = $Data["Series"][$SerieName];
@@ -5126,7 +5123,7 @@
            if ( $XDivs == 0 ) { $XStep = ($this->GraphAreaX2-$this->GraphAreaX1)/4; } else { $XStep = ($this->GraphAreaX2-$this->GraphAreaX1-$XMargin*2)/$XDivs; }
            $X = $this->GraphAreaX1 + $XMargin;
 
-           if ( !is_array($PosArray) ) { $Value = $PosArray; $PosArray = ""; $PosArray[0] = $Value; }
+           if ( !is_array($PosArray) ) { $Value = $PosArray; $PosArray = []; $PosArray[0] = $Value; }
 
            $Plots = []; $Plots[] = $X; $Plots[] = $YZero;
            foreach($PosArray as $Key => $Height)
@@ -5160,7 +5157,7 @@
            if ( $XDivs == 0 ) { $YStep = ($this->GraphAreaY2-$this->GraphAreaY1)/4; } else { $YStep = ($this->GraphAreaY2-$this->GraphAreaY1-$XMargin*2)/$XDivs; }
            $Y = $this->GraphAreaY1 + $XMargin;
 
-           if ( !is_array($PosArray) ) { $Value = $PosArray; $PosArray = ""; $PosArray[0] = $Value; }
+           if ( !is_array($PosArray) ) { $Value = $PosArray; $PosArray = []; $PosArray[0] = $Value; }
 
            $Plots = []; $Plots[] = $YZero; $Plots[] = $Y;
            foreach($PosArray as $Key => $Height)
@@ -5198,7 +5195,7 @@
    /* Validate a palette */
    function validatePalette($Colors,$Surrounding=NULL)
     {
-     $Result = "";
+     $Result = [];
 
      if ( !is_array($Colors) ) { return($this->getRandomColor()); }
 
@@ -5317,7 +5314,7 @@
            if ( $DrawBackground ) { $this->drawFilledRectangle($StartX-1,$TopY-1,$EndX+1,$BottomY+1,array("R"=>$BackgroundR,"G"=>$BackgroundG,"B"=>$BackgroundB,"Alpha"=>$BackgroundAlpha)); }
            if ( $DrawBorder ) { $this->drawRectangle($StartX-1,$TopY-1,$EndX+1,$BottomY+1,array("R"=>$BorderR,"G"=>$BorderG,"B"=>$BorderB,"Alpha"=>$BorderAlpha)); }
 
-           if ( !is_array($PosArray) ) { $Value = $PosArray; $PosArray = ""; $PosArray[0] = $Value; }
+           if ( !is_array($PosArray) ) { $Value = $PosArray; $PosArray = []; $PosArray[0] = $Value; }
 
            $RestoreShadow = $this->Shadow;
            $this->Shadow  = FALSE;
@@ -5409,7 +5406,7 @@
            if ( $DrawBackground ) { $this->drawFilledRectangle($TopX-1,$StartY-1,$BottomX+1,$EndY+1,array("R"=>$BackgroundR,"G"=>$BackgroundG,"B"=>$BackgroundB,"Alpha"=>$BackgroundAlpha)); }
            if ( $DrawBorder ) { $this->drawRectangle($TopX-1,$StartY-1,$BottomX+1,$EndY+1,array("R"=>$BorderR,"G"=>$BorderG,"B"=>$BorderB,"Alpha"=>$BorderAlpha)); }
 
-           if ( !is_array($PosArray) ) { $Value = $PosArray; $PosArray = ""; $PosArray[0] = $Value; }
+           if ( !is_array($PosArray) ) { $Value = $PosArray; $PosArray = []; $PosArray[0] = $Value; }
 
            $RestoreShadow = $this->Shadow;
            $this->Shadow  = FALSE;
@@ -5509,7 +5506,7 @@
            if ( $XDivs == 0 ) { $XStep = ($this->GraphAreaX2-$this->GraphAreaX1)/4; } else { $XStep = ($this->GraphAreaX2-$this->GraphAreaX1-$XMargin*2)/$XDivs; }
            $X = $this->GraphAreaX1 + $XMargin;
 
-           if ( !is_array($PosArray) ) { $Value = $PosArray; $PosArray = ""; $PosArray[0] = $Value; }
+           if ( !is_array($PosArray) ) { $Value = $PosArray; $PosArray = []; $PosArray[0] = $Value; }
            $Sxy = 0; $Sx = 0; $Sy = 0; $Sxx = 0;
            foreach($PosArray as $Key => $Y)
             {
@@ -5544,7 +5541,7 @@
            if ( $XDivs == 0 ) { $YStep = ($this->GraphAreaY2-$this->GraphAreaY1)/4; } else { $YStep = ($this->GraphAreaY2-$this->GraphAreaY1-$XMargin*2)/$XDivs; }
            $Y = $this->GraphAreaY1 + $XMargin;
 
-           if ( !is_array($PosArray) ) { $Value = $PosArray; $PosArray = ""; $PosArray[0] = $Value; }
+           if ( !is_array($PosArray) ) { $Value = $PosArray; $PosArray = []; $PosArray[0] = $Value; }
            $Sxy = 0; $Sx = 0; $Sy = 0; $Sxx = 0;
            foreach($PosArray as $Key => $X)
             {
@@ -5595,7 +5592,7 @@
      list($XMargin,$XDivs) = $this->scaleGetXSettings();
 
      if ( !is_array($Indexes) )    { $Index = $Indexes; $Indexes = []; $Indexes[] = $Index; }
-     if ( !is_array($SeriesName) ) { $SerieName = $SeriesName; $SeriesName = ""; $SeriesName[] = $SerieName; }
+     if ( !is_array($SeriesName) ) { $SerieName = $SeriesName; $SeriesName = []; $SeriesName[] = $SerieName; }
      if ( $ForceLabels != NULL && !is_array($ForceLabels) ) { $ForceLabel = $ForceLabels; $ForceLabels = []; $ForceLabels[] = $ForceLabel; }
 
      foreach ($Indexes as $Key => $Index)
@@ -5636,7 +5633,7 @@
              elseif ( isset($Data["Abscissa"]) && isset($Data["Series"][$Data["Abscissa"]]["Data"][$Index]) )
               $Description = $XLabel;
 
-             $Serie = "";
+             $Serie = [];
              $Serie["R"] = $Data["Series"][$SerieName]["Color"]["R"];
              $Serie["G"] = $Data["Series"][$SerieName]["Color"]["G"];
              $Serie["B"] = $Data["Series"][$SerieName]["Color"]["B"];
@@ -5725,7 +5722,7 @@
              elseif ( isset($Data["Abscissa"]) && isset($Data["Series"][$Data["Abscissa"]]["Data"][$Index]) )
               $Description = $XLabel;
 
-             $Serie = "";
+             $Serie = [];
              if ( isset($Data["Extended"]["Palette"][$Index] ) )
               {
                $Serie["R"] = $Data["Extended"]["Palette"][$Index]["R"];
@@ -5858,7 +5855,7 @@
       {
        $this->Shadow = FALSE;
 
-       $Poly = "";
+       $Poly = [];
        $Poly[] = $X+$this->ShadowX; $Poly[] = $Y+$this->ShadowX;
        $Poly[] = $X+5+$this->ShadowX; $Poly[] = $Y-5+$this->ShadowX;
        $Poly[] = $XMax+$this->ShadowX; $Poly[] = $Y-5+$this->ShadowX;
@@ -5885,7 +5882,7 @@
       $this->drawGradientArea($XMin,$Y-5-$TitleHeight-$CaptionHeight-$HorizontalMargin*2,$XMax,$Y-6,DIRECTION_VERTICAL,$GradientSettings);
      else
       $this->drawGradientArea($XMin,$Y-5-$TitleHeight-$CaptionHeight-$HorizontalMargin*3,$XMax,$Y-6,DIRECTION_VERTICAL,$GradientSettings);
-     $Poly = ""; $Poly[] = $X; $Poly[] = $Y; $Poly[] = $X-5; $Poly[] = $Y-5; $Poly[] = $X+5; $Poly[] = $Y-5;
+     $Poly = []; $Poly[] = $X; $Poly[] = $Y; $Poly[] = $X-5; $Poly[] = $Y-5; $Poly[] = $X+5; $Poly[] = $Y-5;
      $this->drawPolygon($Poly,array("R"=>$GradientEndR,"G"=>$GradientEndG,"B"=>$GradientEndB,"Alpha"=>$BoxAlpha,"NoBorder"=>TRUE));
 
      /* Outer border */
@@ -6050,7 +6047,7 @@
      $Segments[] = array("X1"=>$Points[$i-2],"Y1"=>$Points[$i-1],"X2"=>$Points[0],"Y2"=>$Points[1]);
 
      /* Simplify straight lines */
-     $Result = ""; $inHorizon = FALSE; $LastX = VOID;
+     $Result = []; $inHorizon = FALSE; $LastX = VOID;
      foreach($Segments as $Key => $Pos)
       {
        if ( $Pos["Y1"] != $Pos["Y2"] )
@@ -6064,7 +6061,7 @@
      $Segments = $Result;
 
      /* Do we have something to draw */
-     if ( $Segments == "" ) { return(0); }
+     if ( empty($Segments) ) { return(0); }
 
      /* For segments debugging purpose */
      //foreach($Segments as $Key => $Pos)
@@ -6147,14 +6144,14 @@
            if ($Y == $DebugLine) { print_r($Intersections); }
 
            /* Remove NULL plots */
-           $Result = "";
+           $Result = [];
            for($i=0;$i<=count($Intersections)-1;$i=$i+2)
             {
              if ( isset($Intersections[$i+1]) )
               { if ( $Intersections[$i] != $Intersections[$i+1] ) { $Result[] = $Intersections[$i]; $Result[] = $Intersections[$i+1]; } }
             }
 
-           if ( is_array($Result) )
+           if ( is_array($Result) && !empty($Result) )
             {
              $Intersections = $Result;
 

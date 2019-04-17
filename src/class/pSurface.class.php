@@ -34,7 +34,7 @@
     {
      $this->pChartObject = $pChartObject;
      $this->GridSize     = 10;
-     $this->Points       = "";
+     $this->Points       = [];
     }
 
    /* Define the grid size and initialise the 2D matrix */
@@ -254,7 +254,7 @@
    /* Compute the missing points */
    function computeMissing()
     {
-     $Missing = "";
+     $Missing = [];
      for($X=0;$X<=$this->GridSizeX;$X++)
       {
        for($Y=0;$Y<=$this->GridSizeY;$Y++)

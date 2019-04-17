@@ -89,14 +89,14 @@
 
        if ( $Key == 0 && $DrawLeftHead )
         {
-         $Poly = ""; $Poly[] = $X1-1; $Poly[] = $Y; $Poly[] = $X1-1; $Poly[] = $Y+$Height; $Poly[] = $X1-1-$HeadSize; $Poly[] = $Y+($Height/2);
+         $Poly = []; $Poly[] = $X1-1; $Poly[] = $Y; $Poly[] = $X1-1; $Poly[] = $Y+$Height; $Poly[] = $X1-1-$HeadSize; $Poly[] = $Y+($Height/2);
          $this->pChartObject->drawPolygon($Poly,$Color);
          $this->pChartObject->drawLine($X1-2,$Y,$X1-2-$HeadSize,$Y+($Height/2),$Color);
          $this->pChartObject->drawLine($X1-2,$Y+$Height,$X1-2-$HeadSize,$Y+($Height/2),$Color);
         }
 
        /* Determine the position of the breaks */
-       $Break = "";
+       $Break = [];
        foreach($Values as $iKey => $Value)
         {
          if ( $Value >= $Settings["Start"] && $Value <= $Settings["End"] )
@@ -114,7 +114,7 @@
          else
           {
            sort($Break);
-           $Poly = ""; $Poly[] = $X1; $Poly[] = $Y; $LastPointWritten = FALSE;
+           $Poly = []; $Poly[] = $X1; $Poly[] = $Y; $LastPointWritten = FALSE;
            foreach($Break as $iKey => $Value)
             {
              if ( $Value-5 >= $X1 )
@@ -122,7 +122,7 @@
              elseif ($X1 - ($Value-5) > 0 )
               {
                $Offset = $X1 - ($Value-5);
-               $Poly = ""; $Poly[] = $X1; $Poly[] = $Y + $Offset;
+               $Poly = []; $Poly[] = $X1; $Poly[] = $Y + $Offset;
               }
 
              $Poly[] = $Value;   $Poly[] = $Y+5;
@@ -149,7 +149,7 @@
 
        if ( $Key == count($IndicatorSections)-1 && $DrawRightHead )
         {
-         $Poly = ""; $Poly[] = $X2+1; $Poly[] = $Y; $Poly[] = $X2+1; $Poly[] = $Y+$Height; $Poly[] = $X2+1+$HeadSize; $Poly[] = $Y+($Height/2);
+         $Poly = []; $Poly[] = $X2+1; $Poly[] = $Y; $Poly[] = $X2+1; $Poly[] = $Y+$Height; $Poly[] = $X2+1+$HeadSize; $Poly[] = $Y+($Height/2);
          $this->pChartObject->drawPolygon($Poly,$Color);
          $this->pChartObject->drawLine($X2+1,$Y,$X2+1+$HeadSize,$Y+($Height/2),$Color);
          $this->pChartObject->drawLine($X2+1,$Y+$Height,$X2+1+$HeadSize,$Y+($Height/2),$Color);
@@ -226,7 +226,7 @@
               }
              elseif( $ValueDisplay == INDICATOR_VALUE_LABEL )
               {
-               $Caption = "";
+               $Caption = [];
                $Caption[] = array("Format"=>array("R"=>$Settings["R"],"G"=>$Settings["G"],"B"=>$Settings["B"],"Alpha"=>100),"Caption"=>$Value.$Unit);
                $this->pChartObject->drawLabelBox(floor($X1),floor($Y)+2,"Value - ".$Settings["Caption"],$Caption);
               }

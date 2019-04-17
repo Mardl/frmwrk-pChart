@@ -488,7 +488,7 @@
     {
      if ( !isset($this->Data["Series"][$Serie]) ) { return(NULL); }
 
-     $Result = "";
+     $Result = [];
      $Result["R"] = $this->Data["Series"][$Serie]["Color"]["R"];
      $Result["G"] = $this->Data["Series"][$Serie]["Color"]["G"];
      $Result["B"] = $this->Data["Series"][$Serie]["Color"]["B"];
@@ -528,7 +528,7 @@
    function loadPalette($FileName,$Overwrite=FALSE)
     {
      if ( !file_exists($FileName) ) { return(-1); }
-     if ( $Overwrite ) { $this->Palette = ""; }
+     if ( $Overwrite ) { $this->Palette = []; }
 
      $fileHandle = @fopen($FileName, "r");
      if (!$fileHandle) { return(-1); }
@@ -538,7 +538,7 @@
        if ( preg_match("/,/",$buffer) )
         {
          list($R,$G,$B,$Alpha) = preg_split("/,/",$buffer);
-         if ( $this->Palette == "" ) { $ID = 0; } else { $ID = count($this->Palette); }
+         if ( empty($this->Palette) ) { $ID = 0; } else { $ID = count($this->Palette); }
          $this->Palette[$ID] = array("R"=>$R,"G"=>$G,"B"=>$B,"Alpha"=>$Alpha);
         }
       }
@@ -712,7 +712,7 @@
 
      if ( $Formula == "" ) { return(0); }
 
-     $Result = ""; $Abscissa = "";
+     $Result = []; $Abscissa = [];
      for($i=$MinX; $i<=$MaxX; $i=$i+$XStep)
       {
        $Expression = "\$return = '!'.(".str_replace("z",$i,$Formula).");";
@@ -738,7 +738,7 @@
       {
        if (isset($this->Data["Series"][$SerieName]))
         {
-         $Data = "";
+         $Data = [];
          foreach($this->Data["Series"][$SerieName]["Data"] as $Key => $Value)
           { if ( $Value == VOID ) { $Data[] = VOID; } else { $Data[] = -$Value; } }
          $this->Data["Series"][$SerieName]["Data"] = $Data;

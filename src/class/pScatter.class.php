@@ -411,9 +411,9 @@
           { $Picture = NULL; }
 
          $PosArrayX = $this->getPosArray($SerieValuesX,$SerieXAxis);
-         if ( !is_array($PosArrayX) ) { $Value = $PosArrayX; $PosArrayX = ""; $PosArrayX[0] = $Value; }
+         if ( !is_array($PosArrayX) ) { $Value = $PosArrayX; $PosArrayX = []; $PosArrayX[0] = $Value; }
          $PosArrayY = $this->getPosArray($SerieValuesY,$SerieYAxis);
-         if ( !is_array($PosArrayY) ) { $Value = $PosArrayY; $PosArrayY = ""; $PosArrayY[0] = $Value; }
+         if ( !is_array($PosArrayY) ) { $Value = $PosArrayY; $PosArrayY = []; $PosArrayY[0] = $Value; }
 
          $Color = array("R"=>$Series["Color"]["R"],"G"=>$Series["Color"]["G"],"B"=>$Series["Color"]["B"],"Alpha"=>$Series["Color"]["Alpha"]);
 
@@ -464,9 +464,9 @@
          if ( $ImageMapTitle == NULL ) { $Description = $Data["Series"][$Series["X"]]["Description"]." / ".$Data["Series"][$Series["Y"]]["Description"]; } else { $Description = $ImageMapTitle; }
 
          $PosArrayX = $this->getPosArray($SerieValuesX,$SerieXAxis);
-         if ( !is_array($PosArrayX) ) { $Value = $PosArrayX; $PosArrayX = ""; $PosArrayX[0] = $Value; }
+         if ( !is_array($PosArrayX) ) { $Value = $PosArrayX; $PosArrayX = []; $PosArrayX[0] = $Value; }
          $PosArrayY = $this->getPosArray($SerieValuesY,$SerieYAxis);
-         if ( !is_array($PosArrayY) ) { $Value = $PosArrayY; $PosArrayY = ""; $PosArrayY[0] = $Value; }
+         if ( !is_array($PosArrayY) ) { $Value = $PosArrayY; $PosArrayY = []; $PosArrayY[0] = $Value; }
 
          $Color = array("R"=>$Series["Color"]["R"],"G"=>$Series["Color"]["G"],"B"=>$Series["Color"]["B"],"Alpha"=>$Series["Color"]["Alpha"]);
          if ( $Ticks != 0 )  { $Color["Ticks"]  = $Ticks; }
@@ -514,9 +514,9 @@
          if ( $ImageMapTitle == NULL ) { $Description = $Data["Series"][$Series["X"]]["Description"]." / ".$Data["Series"][$Series["Y"]]["Description"]; } else { $Description = $ImageMapTitle; }
 
          $PosArrayX = $this->getPosArray($SerieValuesX,$SerieXAxis);
-         if ( !is_array($PosArrayX) ) { $Value = $PosArrayX; $PosArrayX = ""; $PosArrayX[0] = $Value; }
+         if ( !is_array($PosArrayX) ) { $Value = $PosArrayX; $PosArrayX = []; $PosArrayX[0] = $Value; }
          $PosArrayY = $this->getPosArray($SerieValuesY,$SerieYAxis);
-         if ( !is_array($PosArrayY) ) { $Value = $PosArrayY; $PosArrayY = ""; $PosArrayY[0] = $Value; }
+         if ( !is_array($PosArrayY) ) { $Value = $PosArrayY; $PosArrayY = []; $PosArrayY[0] = $Value; }
 
          $SplineSettings = array("R"=>$Series["Color"]["R"],"G"=>$Series["Color"]["G"],"B"=>$Series["Color"]["B"],"Alpha"=>$Series["Color"]["Alpha"]);
          if ( $Ticks != 0 )  { $SplineSettings["Ticks"]  = $Ticks; }
@@ -561,7 +561,7 @@
        $ScaleHeight = $Data["Axis"][$AxisID]["ScaleMax"] - $Data["Axis"][$AxisID]["ScaleMin"];
        $Step        = $Height / $ScaleHeight;
 
-       $Result = "";
+       $Result = [];
        foreach($Values as $Key => $Value)
         {
          if ( $Value == VOID ) 
@@ -578,7 +578,7 @@
        $ScaleHeight = $Data["Axis"][$AxisID]["ScaleMax"] - $Data["Axis"][$AxisID]["ScaleMin"];
        $Step        = $Height / $ScaleHeight;
 
-       $Result = "";
+       $Result = [];
        foreach($Values as $Key => $Value)
         {
          if ( $Value == VOID ) 
@@ -654,7 +654,7 @@
          elseif ( $Mode == LEGEND_HORIZONTAL )
           {
            $Lines = preg_split("/\n/",$Series["Description"]);
-           $Width = "";
+           $Width = [];
            foreach($Lines as $Key => $Value)
             {
              $BoxArray = $this->pChartObject->getTextBox($vX+$IconAreaWidth+6,$Y+$IconAreaHeight/2+(($this->pChartObject->FontSize+3)*$Key),$FontName,$FontSize,0,$Value);
@@ -729,7 +729,7 @@
          elseif ( $Mode == LEGEND_HORIZONTAL )
           {
            $Lines = preg_split("/\n/",$Series["Description"]);
-           $Width = "";
+           $Width = [];
            foreach($Lines as $Key => $Value)
             {
              $BoxArray = $this->pChartObject->drawText($X+$IconAreaWidth+4,$Y+$IconAreaHeight/2+(($this->pChartObject->FontSize+3)*$Key),$Value,array("R"=>$FontR,"G"=>$FontG,"B"=>$FontB,"Align"=>TEXT_ALIGN_MIDDLELEFT));
@@ -793,7 +793,7 @@
          elseif ( $Mode == LEGEND_HORIZONTAL )
           {
            $Lines = preg_split("/\n/",$Series["Description"]);
-           $Width = "";
+           $Width = [];
            foreach($Lines as $Key => $Value)
             {
              $BoxArray = $this->pChartObject->getTextBox($vX+$IconAreaWidth+6,$Y+$IconAreaHeight/2+(($this->pChartObject->FontSize+3)*$Key),$FontName,$FontSize,0,$Value);
@@ -902,9 +902,9 @@
      $SerieY = $Series["Y"]; $SerieValuesY = $Data["Series"][$SerieY]["Data"]; $SerieYAxis = $Data["Series"][$SerieY]["Axis"];
 
      $PosArrayX = $this->getPosArray($SerieValuesX,$SerieXAxis);
-     if ( !is_array($PosArrayX) ) { $Value = $PosArrayX; $PosArrayX = ""; $PosArrayX[0] = $Value; }
+     if ( !is_array($PosArrayX) ) { $Value = $PosArrayX; $PosArrayX = []; $PosArrayX[0] = $Value; }
      $PosArrayY = $this->getPosArray($SerieValuesY,$SerieYAxis);
-     if ( !is_array($PosArrayY) ) { $Value = $PosArrayY; $PosArrayY = ""; $PosArrayY[0] = $Value; }
+     if ( !is_array($PosArrayY) ) { $Value = $PosArrayY; $PosArrayY = []; $PosArrayY[0] = $Value; }
 
      foreach($Points as $Key => $Point)
       {
@@ -918,7 +918,7 @@
          elseif ( $DrawPoint == LABEL_POINT_BOX )
           $this->pChartObject->drawFilledRectangle($X-2,$Y-2,$X+2,$Y+2,array("R"=>255,"G"=>255,"B"=>255,"BorderR"=>0,"BorderG"=>0,"BorderB"=>0));
 
-         $Serie = "";
+         $Serie = [];
          $Serie["R"] = $Series["Color"]["R"];
          $Serie["G"] = $Series["Color"]["G"];
          $Serie["B"] = $Series["Color"]["B"];

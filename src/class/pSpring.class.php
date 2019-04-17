@@ -680,7 +680,7 @@
      if ( $CenterGraph ) { $this->center(); }
 
      /* Draw the connections */
-     $Drawn = "";
+     $Drawn = [];
      foreach($this->Data as $Key => $Settings)
       {
        $X	= $Settings["X"];
@@ -690,14 +690,14 @@
         {
          foreach ($Settings["Connections"] as $ID => $NodeID)
           {
-           if ( !isset($Drawn[$Key]) )    { $Drawn[$Key] = ""; }
-           if ( !isset($Drawn[$NodeID]) ) { $Drawn[$NodeID] = ""; }
+           if ( !isset($Drawn[$Key]) )    { $Drawn[$Key] = []; }
+           if ( !isset($Drawn[$NodeID]) ) { $Drawn[$NodeID] = []; }
 
            if ( isset($this->Data[$NodeID]) && !isset($Drawn[$Key][$NodeID]) && !isset($Drawn[$NodeID][$Key]) )
             {
              $Color = array("R"=>$this->Default["LinkR"],"G"=>$this->Default["LinkG"],"B"=>$this->Default["LinkB"],"Alpha"=>$this->Default["Alpha"]);
 
-             if ( $this->Links != "" )
+             if ( !empty($this->Links) )
               {
                if ( isset($this->Links[$Key][$NodeID]["R"]) )
                 { $Color = array("R"=>$this->Links[$Key][$NodeID]["R"],"G"=>$this->Links[$Key][$NodeID]["G"],"B"=>$this->Links[$Key][$NodeID]["B"],"Alpha"=>$this->Links[$Key][$NodeID]["Alpha"]); }
@@ -711,7 +711,7 @@
              $this->pChartObject->drawLine($X,$Y,$X2,$Y2,$Color);
              $Drawn[$Key][$NodeID] = TRUE;
 
-             if ( isset($this->Links) && $this->Links != "" )
+             if ( isset($this->Links) && !empty($this->Links) )
               {
                if ( isset($this->Links[$Key][$NodeID]["Name"]) || isset($this->Links[$NodeID][$Key]["Name"]) )
                 {

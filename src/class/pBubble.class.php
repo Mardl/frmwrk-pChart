@@ -36,7 +36,7 @@
      if ( !is_array($WeightSeries) )	{ $WeightSeries = array($WeightSeries); }
 
      /* Parse each data series to find the new min & max boundaries to scale */
-     $NewPositiveSerie = ""; $NewNegativeSerie = ""; $MaxValues = 0; $LastPositive = 0; $LastNegative = 0;
+     $NewPositiveSerie = []; $NewNegativeSerie = []; $MaxValues = 0; $LastPositive = 0; $LastNegative = 0;
      foreach($DataSeries as $Key => $SerieName)
       {
        $SerieWeightName = $WeightSeries[$Key];
@@ -73,7 +73,7 @@
       }
 
      /* Check for missing values and all the fake positive serie */
-     if ( $NewPositiveSerie != "" )
+     if ( !empty($NewPositiveSerie) )
       {
        for ($i=0; $i<$MaxValues; $i++) { if (!isset($NewPositiveSerie[$i])) { $NewPositiveSerie[$i] = $LastPositive; } }
 
@@ -81,7 +81,7 @@
       }
 
      /* Check for missing values and all the fake negative serie */
-     if ( $NewNegativeSerie != "" )
+     if ( !empty($NewNegativeSerie) )
       {
        for ($i=0; $i<$MaxValues; $i++) { if (!isset($NewNegativeSerie[$i])) { $NewNegativeSerie[$i] = $LastNegative; } }
 
