@@ -69,7 +69,7 @@
    /* Class creator */
    function __construct()
     {
-     $this->Data = "";
+     $this->Data = [];
      $this->Data["XAxisDisplay"]	= AXIS_FORMAT_DEFAULT;
      $this->Data["XAxisFormat"]		= NULL;
      $this->Data["XAxisName"]		= NULL;
@@ -379,7 +379,7 @@
     }
 
    /* Add random values to a given serie */
-   function addRandomValues($SerieName="Serie1",$Options="")
+   function addRandomValues($SerieName="Serie1",$Options=[])
     {
      $Values    = isset($Options["Values"]) ? $Options["Values"] : 20;
      $Min       = isset($Options["Min"]) ? $Options["Min"] : 0;
@@ -498,7 +498,7 @@
     }
 
    /* Set the color of one serie */
-   function setPalette($Series,$Format=NULL)
+   function setPalette($Series,$Format=[])
     {
      if ( !is_array($Series) ) { $Series = $this->convertToArray($Series); }
 
@@ -611,7 +611,7 @@
     {
      $Abscissa = $this->Data["Abscissa"];
 
-     $SelectedSeries = "";
+     $SelectedSeries = [];
      $MaxVal         = 0;
      foreach($this->Data["Axis"] as $AxisID => $Axis)
       {
@@ -664,7 +664,7 @@
     }
 
    /* Load data from a CSV (or similar) data source */
-   function importFromCSV($FileName,$Options="")
+   function importFromCSV($FileName,$Options=[])
     {
      $Delimiter		= isset($Options["Delimiter"]) ? $Options["Delimiter"] : ",";
      $GotHeader		= isset($Options["GotHeader"]) ? $Options["GotHeader"] : FALSE;
@@ -701,7 +701,7 @@
     }
 
    /* Create a dataset based on a formula */
-   function createFunctionSerie($SerieName,$Formula="",$Options="")
+   function createFunctionSerie($SerieName,$Formula="",$Options=[])
     {
      $MinX		= isset($Options["MinX"]) ? $Options["MinX"] : -10;
      $MaxX		= isset($Options["MaxX"]) ? $Options["MaxX"] : 10;

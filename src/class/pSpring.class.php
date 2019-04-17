@@ -46,8 +46,8 @@
    function __construct()
     {
      /* Initialise data arrays */
-     $this->Data = "";
-     $this->Links = "";
+     $this->Data = [];
+     $this->Links = [];
 
      /* Set nodes defaults */
      $this->Default["R"]		= 255;
@@ -83,7 +83,7 @@
     }
 
    /* Set default links options */
-   function setLinkDefaults($Settings="")
+   function setLinkDefaults($Settings=[])
     {
      if ( isset($Settings["R"]) )     { $this->Default["LinkR"] = $Settings["R"]; }
      if ( isset($Settings["G"]) )     { $this->Default["LinkG"] = $Settings["G"]; }
@@ -92,7 +92,7 @@
     }
 
    /* Set default links options */
-   function setLabelsSettings($Settings="")
+   function setLabelsSettings($Settings=[])
     {
      if ( isset($Settings["Type"]) )  { $this->Labels["Type"] = $Settings["Type"]; }
      if ( isset($Settings["R"]) )     { $this->Labels["R"] = $Settings["R"]; }
@@ -136,7 +136,7 @@
      $this->Links[$FromNode][$ToNode]["Ticks"] = $Ticks; $this->Links[$ToNode][$FromNode]["Ticks"] = $Ticks;
     }
 
-   function setNodeDefaults($Settings="")
+   function setNodeDefaults($Settings=[])
     {
      if ( isset($Settings["R"]) ) { $this->Default["R"]					= $Settings["R"]; }
      if ( isset($Settings["G"]) ) { $this->Default["G"]					= $Settings["G"]; }
@@ -158,7 +158,7 @@
     }
 
    /* Add a node */
-   function addNode($NodeID,$Settings="")
+   function addNode($NodeID,$Settings=[])
     {
      /* if the node already exists, ignore */
      if (isset($this->Data[$NodeID])) { return(0); }
@@ -209,7 +209,7 @@
     }
 
    /* Set color attribute for a list of nodes */
-   function setNodesColor($Nodes,$Settings="")
+   function setNodesColor($Nodes,$Settings=[])
     {
      if ( is_array($Nodes) )
       {
@@ -634,7 +634,7 @@
     }
 
    /* Create the encoded string */
-   function drawSpring($Object,$Settings="")
+   function drawSpring($Object,$Settings=[])
     {
      $this->pChartObject = $Object;
 
