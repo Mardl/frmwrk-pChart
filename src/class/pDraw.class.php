@@ -3632,7 +3632,7 @@
             }
            $Area = $this->drawSpline($WayPoints,array("Force"=>$Force,"PathOnly"=>TRUE));
 
-           if ( !empty($Area )
+           if ( !empty($Area ))
             {
              foreach ($Area as $key => $Points)
               {
@@ -3669,7 +3669,7 @@
               {
                $Area = $this->drawSpline($WayPoints,array("Force"=>$Force,"PathOnly"=>TRUE));
 
-               if ( !empty($Area )
+               if ( !empty($Area ))
                 {
                  foreach ($Area as $key => $Points)
                   {
@@ -3695,7 +3695,7 @@
             }
            $Area = $this->drawSpline($WayPoints,array("Force"=>$Force,"PathOnly"=>TRUE));
 
-           if ( !empty($Area )
+           if ( !empty($Area ))
             {
              foreach ($Area as $key => $Points)
               {
